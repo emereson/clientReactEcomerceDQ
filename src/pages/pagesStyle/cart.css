@@ -1,0 +1,12 @@
+.cart__container {
+    position: fixed;
+    top: 4em;
+    right: 0;
+    width: 50%;
+    background-color: aliceblue;
+    height: 100%;
+}
+
+.closeCart {
+    transform: translateX(100%);
+}

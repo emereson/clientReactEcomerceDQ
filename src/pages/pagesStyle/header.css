@@ -1,0 +1,109 @@
+.header__container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4em;
+    background-color: var(--body-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5em;
+    z-index: 50;
+}
+
+.header__divContainer {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 0 1em;
+    gap: 1em;
+}
+
+.header__logoImg {
+    position: absolute;
+    left: 1em;
+    width: 6em;
+    height: 100%;
+}
+
+
+.header__ul {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5em;
+
+}
+
+.header__ul li {
+    color: var(--text-color-gray);
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.header__ul li:hover {
+    color: var(--body-red);
+    transition: 0.3s ease;
+}
+
+.header__ul a {
+    color: var(--text-color-gray);
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.header__ul a:hover {
+    color: var(--body-red);
+    transition: 0.3s ease;
+}
+
+.header__ul i {
+    font-size: 2.1em;
+}
+
+.header__section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.header__section i {
+    font-size: 2em;
+    color: var(--body-red);
+}
+
+.header__section img {
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+}
+
+.header__section h3 {
+    font-size: 1.2em;
+    width: 100%;
+    color: var(--text-color-white);
+    text-align: center;
+}
+
+
+@media(max-width:800px) {
+    .header__container {
+        background-color: antiquewhite;
+    }
+}
+
+@media(max-height:600px) {
+    .header__container {
+        justify-content: start;
+    }
+}
