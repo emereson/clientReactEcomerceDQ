@@ -55,7 +55,10 @@ const CardProduct = ({ product, selectCategory, filterTextProduct }) => {
       counter: 1,
     };
 
-    dispatch(setCart([cartItem]));
+    if (selectOption) {
+      dispatch(setCart([cartItem]));
+    }
+
     setselectExtra([]);
   };
 

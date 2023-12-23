@@ -14,8 +14,6 @@ const Home = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(allSections);
-
   const clickTop = () => {
     const element = document.getElementById('home__section__three');
     if (element) {

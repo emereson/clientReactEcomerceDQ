@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './pagesStyle/header.css';
 import Cart from './Cart';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const userDataJSON = localStorage.getItem('userData');
   const userData = JSON.parse(userDataJSON);
   const [openCart, setopenCart] = useState(false);
+  const cartData = useSelector((state) => state.cart);
 
   return (
     <header className="header__container">
@@ -34,17 +36,18 @@ const Header = () => {
 
           <li onClick={() => setopenCart(!openCart)}>
             <i className="icon icon-shopping-cart2"></i>
+            <span className="header__cartCounter">{cartData?.length}</span>
           </li>
         </ul>
         <section className="header__section">
           {!userData ? (
             <i className="icon icon-user"></i>
           ) : (
-            <img src={userData?.user.userImg} alt="" />
+            <img src={userData?.client.clientImg} alt="" />
           )}
         </section>
       </div>
-      <Cart setopenCart={setopenCart} openCart={openCart} />
+      <Cart setopenCart={setopenCart} openCart={openCart} cartData={cartData} />
     </header>
   );
 };

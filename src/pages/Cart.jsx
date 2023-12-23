@@ -1,50 +1,64 @@
-import { useSelector, useDispatch } from 'react-redux';
 import './pagesStyle/cart.css';
-import { decrementCounter, incrementCounter } from '../store/Slices/Cart.slice';
+import FormatPrice from '../hooks/FormatPrice';
+import CartCardProduct from '../components/cart/CartCardProduct';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const Cart = ({ openCart }) => {
-  const cartData = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
+const Cart = ({ openCart, cartData, setopenCart }) => {
+  const [buttonAnimation, setButtonAnimation] = useState(false);
 
   // Función para calcular el precio total de un producto en el carrito
   const calculateTotalPrice = (product) => {
-    const optionPrice = product.selectOption.price || 0;
-    const extraTotalPrice = product.selectExtra.reduce(
-      (total, extra) => total + (extra.price || 0),
+    const optionPrice = product?.selectOption?.price || 0;
+    const extraTotalPrice = product?.selectExtra?.reduce(
+      (total, extra) => total + (extra?.price || 0),
       0
     );
-    return (optionPrice + extraTotalPrice) * product.counter;
+    return (optionPrice + extraTotalPrice) * product?.counter;
   };
 
-  console.log(cartData);
+  const calculateCartTotal = () => {
+    return cartData.reduce(
+      (total, product) => total + calculateTotalPrice(product),
+      0
+    );
+  };
+
   return (
     <div className={`cart__container  ${openCart ? '' : 'closeCart'}`}>
-      <section>
+      <section className="cart__sectionOne">
         {cartData?.map((dataProduct, index) => (
-          <article key={index}>
-            <img src={dataProduct.product.productImg} alt="" />
-            <div>
-              <h3>{dataProduct.product.name}</h3>
-              <ul>
-                <li>
-                  {dataProduct.selectOption.name}:
-                  {dataProduct.selectOption.size}
-                </li>
-                {dataProduct.selectExtra.map((extra, index) => (
-                  <li key={index}>{extra.name}</li>
-                ))}
-              </ul>
-              <div>
-                <p onClick={() => dispatch(decrementCounter({ index }))}>-</p>
-                <span>{dataProduct.counter}</span>
-                <p onClick={() => dispatch(incrementCounter({ index }))}>+</p>
-              </div>
-            </div>
-            <div>
-              <p>s/{calculateTotalPrice(dataProduct)}</p>
-            </div>
-          </article>
+          <CartCardProduct
+            key={index}
+            dataProduct={dataProduct}
+            index={index}
+          />
         ))}
+      </section>
+
+      <section className="cart__sectionTwo">
+        <article className="cartSectionTwo__articleOne">
+          <p>TOTAL: </p>
+          <span>
+            s/
+            <FormatPrice price={calculateCartTotal()} />
+          </span>
+        </article>
+        <Link
+          to="finalizar-compra"
+          className="cartSectionTwo__articleTwo"
+          onMouseEnter={() => setButtonAnimation(true)}
+          onMouseLeave={() => setButtonAnimation(false)}
+          onClick={() => setopenCart(false)}
+        >
+          <p style={buttonAnimation ? { transform: 'translatex(-100%)' } : {}}>
+            continuar
+          </p>
+          <i
+            className="bx bx-chevron-right"
+            style={buttonAnimation ? { transform: 'translatex(-90%)' } : {}}
+          ></i>
+        </Link>
       </section>
     </div>
   );

@@ -2,13 +2,15 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import './pagesStyle/login.css';
+import { useState } from 'react';
 
 const Login = () => {
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
+  const [error, seterror] = useState();
 
   const submit = (data) => {
-    const url = `${import.meta.env.VITE_URL_API}/user/login`;
+    const url = `${import.meta.env.VITE_URL_API}/client/login`;
 
     axios
       .post(url, data)
@@ -22,7 +24,7 @@ const Login = () => {
       })
 
       .catch((err) => {
-        console.log(err);
+        seterror(err.response.data);
       });
 
     reset();
@@ -30,29 +32,59 @@ const Login = () => {
 
   return (
     <div className="longin__container">
-      <form className="login__form" onSubmit={handleSubmit(submit)}>
+      <section className="longin__section">
         <img src="/logo.svg" alt="" />
         <h2>INICIAR SESION</h2>
-        <div className="login__div">
-          <label htmlFor="dni">DNI:</label>
-          <input
-            {...register('dni')}
-            id="dni"
-            type="number"
-            required
-          />
-        </div>
-        <div className="login__div">
-          <label htmlFor="password">Contraseña:</label>
-          <input
-            {...register('password')}
-            id="password"
-            type="password"
-            required
-          />
-        </div>
-        <button>iniciar sesión</button>
-      </form>
+        <form className="login__form" onSubmit={handleSubmit(submit)}>
+          <div className="login__div">
+            <label htmlFor="email">
+              <i class="bx bxs-user"></i>
+            </label>
+            <input
+              {...register('email')}
+              id="email"
+              type="email"
+              required
+              placeholder="email"
+            />
+          </div>
+
+          {error?.error === 'Email no found' ? (
+            <span>
+              El correo electrónico no se encuetra registrado, por favor
+              registrese
+            </span>
+          ) : (
+            ''
+          )}
+
+          <div className="login__div">
+            <label htmlFor="password">
+              <i class="icon icon-padlock-1"></i>
+            </label>
+            <input
+              {...register('password')}
+              id="password"
+              type="password"
+              placeholder="contraseña"
+              required
+            />
+          </div>
+
+          {error?.error === 'Password incorrect' ? (
+            <span>La contraseña es incorrecta</span>
+          ) : (
+            ''
+          )}
+
+          <button>iniciar sesión</button>
+        </form>
+
+        <article className="longinSection__article">
+          <span>¿No tienes una cuenta?</span>
+          <p onClick={() => navigate('/register')}>Registrate</p>
+        </article>
+      </section>
     </div>
   );
 };

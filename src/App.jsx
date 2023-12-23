@@ -8,16 +8,21 @@ import './icomoon/css/iconfont.min.css';
 import Home from './pages/Home';
 import Footer from './pages/Footer';
 import Products from './pages/Products';
+import FinalizePurchase from './pages/FinalizePurchase';
+import Register from './pages/Register';
 function App() {
   return (
     <div className="app_container">
       <Header />
 
       <Routes>
-        <Route path="/log-in" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/seccion/:id" element={<Products />} />
-        <Route element={<ProtectedRoutes />}></Route>
+        <Route path="/log-in" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/finalizar-compra" element={<FinalizePurchase />} />
+        </Route>
       </Routes>
       <Footer />
     </div>
