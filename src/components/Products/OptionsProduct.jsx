@@ -13,6 +13,11 @@ const OptionsProduct = ({
   selectExta,
   handleAddToCart,
 }) => {
+  const priceDiscount = (option) => {
+    const totalPrice = option?.price - (option?.price * option?.discount) / 100;
+    return totalPrice;
+  };
+
   return (
     <div
       className={`optionsProduct__container ${
@@ -47,7 +52,33 @@ const OptionsProduct = ({
                   </span>
                   {option.name}: {option.size}
                 </p>
-                <p>s/{<FormatPrice price={option.price} />}</p>
+
+                <div className="optionsProduct__sectionAticleTwo__divPrices">
+                  {option?.discount > 0 ? <p>- {option.discount}%</p> : null}
+                  <p
+                    style={
+                      option?.discount > 0
+                        ? {
+                            textDecoration: 'line-through',
+                            color: '#666666cc',
+                          }
+                        : {}
+                    }
+                  >
+                    S/
+                    {option ? <FormatPrice price={option.price} /> : '0.00'}
+                  </p>{' '}
+                  {option?.discount > 0 ? (
+                    <p>
+                      S/
+                      {option ? (
+                        <FormatPrice price={priceDiscount(option)} />
+                      ) : (
+                        '0.00'
+                      )}
+                    </p>
+                  ) : null}
+                </div>
               </li>
             ))}
             {product?.productExtras.map((extra) => (

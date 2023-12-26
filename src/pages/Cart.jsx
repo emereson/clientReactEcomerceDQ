@@ -9,19 +9,25 @@ const Cart = ({ openCart, cartData, setopenCart }) => {
 
   // Función para calcular el precio total de un producto en el carrito
   const calculateTotalPrice = (product) => {
-    const optionPrice = product?.selectOption?.price || 0;
+    const optionPrice = product?.priceDiscount || 0;
     const extraTotalPrice = product?.selectExtra?.reduce(
       (total, extra) => total + (extra?.price || 0),
       0
     );
-    return (optionPrice + extraTotalPrice) * product?.counter;
+    const total = (optionPrice + extraTotalPrice) * product?.counter;
+
+    return total;
   };
 
   const calculateCartTotal = () => {
-    return cartData.reduce(
+    const subtotal = cartData.reduce(
       (total, product) => total + calculateTotalPrice(product),
       0
     );
+
+    const roundedTotal = parseFloat(subtotal.toFixed(2));
+
+    return roundedTotal;
   };
 
   return (

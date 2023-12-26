@@ -18,16 +18,13 @@ const Login = () => {
         localStorage.setItem('token', res.data.token);
         const userDataJSON = JSON.stringify(res.data);
         localStorage.setItem('userData', userDataJSON);
-
         navigate('/');
-        window.location.reload();
+        i8u;
       })
 
       .catch((err) => {
         seterror(err.response.data);
       });
-
-    reset();
   };
 
   return (
@@ -60,7 +57,7 @@ const Login = () => {
 
           <div className="login__div">
             <label htmlFor="password">
-              <i class="icon icon-padlock-1"></i>
+              <i className="icon icon-padlock-1"></i>
             </label>
             <input
               {...register('password')}

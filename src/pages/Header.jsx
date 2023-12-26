@@ -4,9 +4,7 @@ import './pagesStyle/header.css';
 import Cart from './Cart';
 import { useSelector } from 'react-redux';
 
-const Header = () => {
-  const userDataJSON = localStorage.getItem('userData');
-  const userData = JSON.parse(userDataJSON);
+const Header = ({ userData }) => {
   const [openCart, setopenCart] = useState(false);
   const cartData = useSelector((state) => state.cart);
 
@@ -43,7 +41,7 @@ const Header = () => {
           {!userData ? (
             <i className="icon icon-user"></i>
           ) : (
-            <img src={userData?.client.clientImg} alt="" />
+            <img src={userData?.clientImg} alt="" />
           )}
         </section>
       </div>

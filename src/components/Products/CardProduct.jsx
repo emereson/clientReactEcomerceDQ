@@ -8,8 +8,8 @@ import { setCart } from '../../store/Slices/Cart.slice';
 const CardProduct = ({ product, selectCategory, filterTextProduct }) => {
   const [productOptions, setProductOptions] = useState([]);
   const [openOption, setopenOption] = useState(false);
-  const [selectPrice, setSelectPrice] = useState(null);
   const [selectOption, setselectOption] = useState(null);
+  const [selectDefaultOption, setselectDefaultOption] = useState(null);
   const [selectExta, setselectExtra] = useState([]);
   const dispatch = useDispatch();
 
@@ -19,11 +19,10 @@ const CardProduct = ({ product, selectCategory, filterTextProduct }) => {
       setProductOptions(options);
 
       const defaultOption = options.find(
-        (option) => option.name.toLowerCase() === 'mediana'
+        (option) => option.name.toLowerCase() === 'grande'
       );
-
+      setselectDefaultOption(defaultOption || options[0]);
       setselectOption(defaultOption || options[0]);
-      setSelectPrice(defaultOption || options[0]);
     };
 
     configureProductOptions();
@@ -52,6 +51,7 @@ const CardProduct = ({ product, selectCategory, filterTextProduct }) => {
       product: product,
       selectExtra: selectExta,
       selectOption: selectOption,
+      priceDiscount,
       counter: 1,
     };
 
@@ -62,6 +62,13 @@ const CardProduct = ({ product, selectCategory, filterTextProduct }) => {
     setselectExtra([]);
   };
 
+  const priceDiscount =
+    selectOption?.price - (selectOption?.price * selectOption?.discount) / 100;
+
+  const priceDiscountDefault =
+    selectDefaultOption?.price -
+    (selectDefaultOption?.price * selectDefaultOption?.discount) / 100;
+
   return (
     <div className={`cardProduct__container ${validFilterProduct}`}>
       <article className="cardProduct__articleOne">
@@ -69,8 +76,21 @@ const CardProduct = ({ product, selectCategory, filterTextProduct }) => {
         <div>
           <h3>{product.name}</h3>
           <small>{product.description}</small>
-          <p>Size: {selectPrice?.name?.charAt(0).toUpperCase()}</p>
+          <p>Tamaño: {selectOption?.name?.charAt(0).toUpperCase()}</p>
         </div>
+        <span
+          className="cardProduct__articleOne__label"
+          style={{ backgroundColor: `${product.labelColor}` }}
+        >
+          {product.label}
+        </span>
+        {selectOption?.discount > 0 ? (
+          <span className="cardProduct__articleOne__labelDescount">
+            - {selectOption.discount}%
+          </span>
+        ) : (
+          ''
+        )}
       </article>
       <article className="cardProduct__articleTwo">
         <ul>
@@ -80,9 +100,37 @@ const CardProduct = ({ product, selectCategory, filterTextProduct }) => {
           >
             Opciones:
           </li>
+
           <li className="cardProduct__articleTwo__price">
-            S/{selectPrice ? <FormatPrice price={selectPrice.price} /> : '0.00'}
+            {selectDefaultOption?.discount > 0 ? (
+              <p>
+                S/
+                {selectDefaultOption ? (
+                  <FormatPrice price={priceDiscountDefault} />
+                ) : (
+                  '0.00'
+                )}
+              </p>
+            ) : null}
+            <p
+              style={
+                selectDefaultOption?.discount > 0
+                  ? {
+                      textDecoration: 'line-through',
+                      color: '#666666cc',
+                    }
+                  : {}
+              }
+            >
+              S/
+              {selectDefaultOption ? (
+                <FormatPrice price={selectDefaultOption.price} />
+              ) : (
+                '0.00'
+              )}
+            </p>
           </li>
+
           <li
             className=" cardProduct__articleTwo__addCart"
             onClick={handleAddToCart}

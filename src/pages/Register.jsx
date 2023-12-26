@@ -19,7 +19,6 @@ const Register = () => {
         const userDataJSON = JSON.stringify(res.data);
         localStorage.setItem('userData', userDataJSON);
         navigate('/');
-        window.location.reload();
       })
 
       .catch((err) => {

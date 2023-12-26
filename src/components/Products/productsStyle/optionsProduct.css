@@ -132,6 +132,14 @@
     color: var(--text-color-white);
 }
 
+.optionsProduct__sectionAticleTwo__divPrices {
+    width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    gap: 0.5em;
+}
+
 /* optionsProduct__sectionAticleThree */
 
 .optionsProduct__sectionAticleThree {

@@ -39,6 +39,7 @@
 .cardProduct__articleOne {
     position: relative;
     height: 190px;
+    overflow: hidden;
 }
 
 .cardProduct__articleOne img {
@@ -73,18 +74,52 @@
 
 .cardProduct__articleOne p {
     position: absolute;
-    right: 1em;
+    right: 0.5em;
     bottom: 1em;
     background-color: var(--body-red);
     padding: 0 0.5em;
     border-radius: 3px;
 }
 
+.cardProduct__articleOne__label {
+    position: absolute;
+    top: 1em;
+    left: 0.5em;
+    color: var(--text-color-white);
+    padding: 0 0.8em;
+    font-size: 16px;
+    border-radius: 3px;
+}
+
+.cardProduct__articleOne__labelDescount {
+    font-size: 13px;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--text-color-white);
+    text-align: center;
+    line-height: 20px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 100px;
+    display: block;
+    background: var(--body-red);
+    -webkit-box-shadow: 0 6px 10px -5px #000;
+    -moz-box-shadow: 0 6px 10px -5px #000;
+    box-shadow: 0 6px 10px -5px #000;
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 25%);
+    position: absolute;
+    top: 19px;
+    right: -21px;
+}
+
 /* cardProduct__articleTwo */
 
 .cardProduct__articleTwo {
     width: 100%;
-    padding: 1em;
+    padding: 0.5em;
     background-color: var(--body-white);
     border: 1px solid var(--text-color-grayLight);
     box-shadow: 0 2px 2px 0 rgb(9 30 66 / 13%);
@@ -105,7 +140,7 @@
     justify-content: center;
     align-items: center;
     gap: 0.5em;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     color: var(--text-color-gray);
     cursor: pointer;
@@ -124,18 +159,27 @@
 }
 
 .cardProduct__articleTwo__price {
+    display: flex;
+    flex-wrap: wrap;
     cursor: auto !important;
+    gap: 0.5em !important;
+    justify-content: center;
+    align-items: start;
 }
+
 
 .cardProduct__articleTwo__price:hover {
     color: var(--text-color-gray) !important;
 }
 
-.cardProduct__articleTwo__price::before {
+.cardProduct__articleTwo__price p::before {
     content: "\ea68";
     font-family: "iconfont";
     font-size: 1.4em;
+    padding-right: 0.3em;
 }
+
+
 
 
 .cardProduct__articleTwo__addCart::after {

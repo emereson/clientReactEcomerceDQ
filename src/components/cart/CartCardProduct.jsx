@@ -12,7 +12,7 @@ const CartCardProduct = ({ dataProduct, index }) => {
   const dispatch = useDispatch();
 
   const calculateTotalPrice = (product) => {
-    const optionPrice = product?.selectOption?.price || 0;
+    const optionPrice = product?.priceDiscount || 0;
     const extraTotalPrice = product?.selectExtra?.reduce(
       (total, extra) => total + (extra.price || 0),
       0
