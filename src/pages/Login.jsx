@@ -19,7 +19,6 @@ const Login = () => {
         const userDataJSON = JSON.stringify(res.data);
         localStorage.setItem('userData', userDataJSON);
         navigate('/');
-        i8u;
       })
 
       .catch((err) => {
