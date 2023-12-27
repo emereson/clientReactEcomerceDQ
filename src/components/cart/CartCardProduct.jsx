@@ -14,10 +14,14 @@ const CartCardProduct = ({ dataProduct, index }) => {
   const calculateTotalPrice = (product) => {
     const optionPrice = product?.priceDiscount || 0;
     const extraTotalPrice = product?.selectExtra?.reduce(
-      (total, extra) => total + (extra.price || 0),
+      (total, extra) => total + (extra?.price || 0),
       0
     );
-    return (optionPrice + extraTotalPrice) * product?.counter;
+
+    const totalPrice = (optionPrice + extraTotalPrice) * product?.counter;
+
+    // Redondea y limita a dos decimales
+    return Number(totalPrice.toFixed(2));
   };
 
   const handleRemoveProduct = () => {

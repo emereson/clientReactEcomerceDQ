@@ -19,7 +19,6 @@ const FPCardProduct = ({ dataProduct, index }) => {
     );
     return optionPrice + extraTotalPrice;
   };
-  console.log(dataProduct);
 
   const calculateSubTotalPrice = (product) => {
     const optionPrice = product?.priceDiscount || 0;

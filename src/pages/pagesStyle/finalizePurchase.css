@@ -36,7 +36,8 @@
 
 .finalizePurchase__sectionOne {
     position: absolute;
-
+    top: 0;
+    left: 0;
     width: 100%;
     max-width: 800px;
     display: flex;
@@ -67,6 +68,7 @@
 /* finalizePurchase__sectionOne__dataOrder */
 
 .finalizePurchase__sectionOne__dataOrder {
+
     width: 100%;
     height: 100%;
     display: flex;
@@ -105,10 +107,11 @@
 
 .finalizePurchase__sectionOne__continue {
     width: calc(100% - 1em);
+    height: 58px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1em 1.5em;
+    padding: 16px 1.5em;
     background-color: var(--body-red);
     color: var(--text-color-white);
     border-radius: 0.5em;
@@ -138,10 +141,11 @@
 
 .finalizePurchase__sectionOne__back {
     width: calc(100% - 1em);
+    height: 58px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1em 1.5em;
+    padding: 16px 1.5em;
     margin-top: 0.8em;
     background-color: var(--body-white);
     border: 2px solid var(--body-black);

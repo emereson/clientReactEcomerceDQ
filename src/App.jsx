@@ -18,21 +18,25 @@ function App() {
   const userStorage = JSON.parse(userDataJSON);
   const [userData, setuserData] = useState();
 
+  console.log(userStorage);
+
   useEffect(() => {
     const url = `${import.meta.env.VITE_URL_API}/client/${
-      userStorage?.client.id
+      userStorage?.client?.id
     }`;
 
-    axios
-      .get(url)
-      .then((res) => {
-        setuserData(res.data.client);
-      })
+    if (userStorage) {
+      axios
+        .get(url)
+        .then((res) => {
+          setuserData(res.data.client);
+        })
 
-      .catch((err) => {
-        console.log(err);
-        localStorage.clear();
-      });
+        .catch((err) => {
+          console.log(err);
+          localStorage.clear();
+        });
+    }
   }, [userDataJSON]);
 
   return (
@@ -42,7 +46,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/seccion/:id" element={<Products />} />
-        <Route path="/log-in" element={<Login />} />
+        <Route path="/log-in" element={<Login setuserData={setuserData} />} />
         <Route path="/register" element={<Register />} />
         <Route element={<ProtectedRoutes />}>
           <Route

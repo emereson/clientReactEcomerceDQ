@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './pagesStyle/login.css';
 import { useState } from 'react';
 
-const Login = () => {
+const Login = ({ setuserData }) => {
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
   const [error, seterror] = useState();
@@ -18,11 +18,13 @@ const Login = () => {
         localStorage.setItem('token', res.data.token);
         const userDataJSON = JSON.stringify(res.data);
         localStorage.setItem('userData', userDataJSON);
+        setuserData(res.data);
         navigate('/');
       })
 
       .catch((err) => {
         seterror(err.response.data);
+        console.log(err);
       });
   };
 
@@ -34,7 +36,7 @@ const Login = () => {
         <form className="login__form" onSubmit={handleSubmit(submit)}>
           <div className="login__div">
             <label htmlFor="email">
-              <i class="bx bxs-user"></i>
+              <i className="bx bxs-user"></i>
             </label>
             <input
               {...register('email')}

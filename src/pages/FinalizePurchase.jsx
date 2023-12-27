@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import FPCardProduct from '../components/FinalizePurchase.jsx/FPCardProduct';
 import './pagesStyle/finalizePurchase.css';
 import FPDelivery from '../components/FinalizePurchase.jsx/FPDelivery';
 import FPDataClient from '../components/FinalizePurchase.jsx/FPDataClient';
-import FPChekout from '../components/FinalizePurchase.jsx/FPChekout';
 
 const FinalizePurchase = ({ userData }) => {
   const cartData = useSelector((state) => state.cart);
@@ -13,14 +12,49 @@ const FinalizePurchase = ({ userData }) => {
   const [alertDelivery, setalertDelivery] = useState(false);
   const [buttonAnimation, setButtonAnimation] = useState(false);
   const [selectSlide, setselectSlide] = useState('dataOrder');
+  const [dataClient, setdataClient] = useState();
+  const [dataPay, setDataPay] = useState({});
+  console.log(dataPay);
 
+  useEffect(() => {
+    // Calcula la información detallada de cada producto
+    const productsDetails = cartData.map((product) => ({
+      dataProduct: product.product,
+      counter: product.counter,
+      selectOption: product.selectOption,
+      selectExtra: product.selectExtra,
+      price: calculatePrice(product),
+      totalPrice: calculateTotalPrice(product),
+    }));
+
+    // Actualiza el estado dataPay con la información detallada de los productos
+    setDataPay((prevData) => ({
+      ...prevData,
+      products: productsDetails,
+      dataClient,
+      delivery: selectDelivery,
+      totalPrice: calculateTotal(),
+    }));
+  }, [cartData, dataClient, selectDelivery]); // Asegúrate de incluir cartData como dependencia si se utiliza en el efecto
+  const calculatePrice = (product) => {
+    const optionPrice = product?.priceDiscount || 0;
+    const extraTotalPrice = product?.selectExtra?.reduce(
+      (total, extra) => total + (extra.price || 0),
+      0
+    );
+    return optionPrice + extraTotalPrice;
+  };
   const calculateTotalPrice = (product) => {
     const optionPrice = product?.priceDiscount || 0;
     const extraTotalPrice = product?.selectExtra?.reduce(
       (total, extra) => total + (extra?.price || 0),
       0
     );
-    return (optionPrice + extraTotalPrice) * product?.counter;
+
+    const totalPrice = (optionPrice + extraTotalPrice) * product?.counter;
+
+    // Redondea y limita a dos decimales
+    return Number(totalPrice.toFixed(2));
   };
 
   const calculateTotal = () => {
@@ -99,8 +133,10 @@ const FinalizePurchase = ({ userData }) => {
           userData={userData}
           selectSlide={selectSlide}
           setselectSlide={setselectSlide}
+          setdataClient={setdataClient}
+          dataPay={dataPay}
         />
-        <FPChekout />
+        {/* <FPChekout /> */}
       </div>
     </div>
   );

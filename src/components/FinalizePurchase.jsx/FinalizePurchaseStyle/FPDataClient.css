@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     gap: 1em;
-    padding: 1.5em;
+    padding: 2em 0 0;
 }
 
 .FPDataClient__form__div {
@@ -15,10 +15,11 @@
     justify-content: center;
     align-items: center;
     color: var(--text-color-gray);
+    padding: 0 1.5em;
 }
 
 .FPDataClient__form__label {
-    left: 16px;
+    left: 35px;
     position: absolute;
     font-size: 16px;
     transition: 0.5s ease;

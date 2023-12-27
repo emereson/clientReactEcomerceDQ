@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import './FinalizePurchaseStyle/FPDataClient.css';
+import axios from 'axios';
+import config from '../../utils/getToken';
 
 const FPDataClient = ({
   calculateTotal,
   userData,
   selectSlide,
   setselectSlide,
+  setdataClient,
+  dataPay,
 }) => {
   const { register, handleSubmit, reset } = useForm();
   const [buttonAnimation, setButtonAnimation] = useState(false);
@@ -18,6 +22,22 @@ const FPDataClient = ({
     setInputsLength({ ...inputsLength, [fieldName]: value.length });
   };
 
+  const saveDataClient = (data) => {
+    setdataClient(data);
+
+    const url = `${import.meta.env.VITE_URL_API}/client-order/${userData.id}`;
+
+    axios
+      .post(url, dataPay, config)
+      .then((res) => {
+        console.log(res);
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <section
       className={`finalizePurchase__sectionOne ${
@@ -26,7 +46,11 @@ const FPDataClient = ({
     >
       <h2>Resumen de tu Pedido:</h2>
       <div className="finalizePurchase__sectionOne__dataOrder">
-        <form action="" className="FPDataClient__form">
+        <form
+          action=""
+          className="FPDataClient__form"
+          onSubmit={handleSubmit(saveDataClient)}
+        >
           <div className="FPDataClient__form__div">
             <label
               htmlFor="name"
@@ -136,49 +160,52 @@ const FPDataClient = ({
               required
             />
           </div>
-        </form>
-        <div className="finalizePurchase__sectionOne__total">
-          <h3>TOTAL: </h3>
-          <p>s/{calculateTotal()}</p>
-        </div>
-        <div className="FPDataClient__acceptTerms">
-          <article
-            className="FPDataClient__acceptTerms__article"
-            onClick={() => setacceptTerms(!acceptTerms)}
-          >
-            <span
-              className="optionsProduct__sectionAticleTwo__extraCheckout"
-              style={{
-                backgroundColor: acceptTerms
-                  ? 'var(--text-color-red)'
-                  : 'white',
-              }}
+          <div className="finalizePurchase__sectionOne__total">
+            <h3>TOTAL: </h3>
+            <p>s/{calculateTotal()}</p>
+          </div>
+          <div className="FPDataClient__acceptTerms">
+            <article
+              className="FPDataClient__acceptTerms__article"
+              onClick={() => setacceptTerms(!acceptTerms)}
             >
-              <i className="bx bx-check"></i>
-            </span>
-            <p>Acepto</p>
-            <a href="/terms.pdf" target="_blank" rel="noopener noreferrer">
-              Términos y Condiciones
-            </a>
-          </article>
+              <span
+                className="optionsProduct__sectionAticleTwo__extraCheckout"
+                style={{
+                  backgroundColor: acceptTerms
+                    ? 'var(--text-color-red)'
+                    : 'white',
+                }}
+              >
+                <i className="bx bx-check"></i>
+              </span>
+              <p>Acepto</p>
+              <a href="/terms.pdf" target="_blank" rel="noopener noreferrer">
+                Términos y Condiciones
+              </a>
+            </article>
 
-          <span onClick={() => setselectSlide('dataOrder')}>
-            Modificar Orden
-          </span>
-        </div>
-        <div
-          className="finalizePurchase__sectionOne__continue"
-          onMouseEnter={() => setButtonAnimation(true)}
-          onMouseLeave={() => setButtonAnimation(false)}
-        >
-          <p style={buttonAnimation ? { transform: 'translatex(-100%)' } : {}}>
-            Pagar
-          </p>
-          <i
-            className="bx bx-chevron-right"
-            style={buttonAnimation ? { transform: 'translatex(-90%)' } : {}}
-          ></i>
-        </div>
+            <span onClick={() => setselectSlide('dataOrder')}>
+              Modificar Orden
+            </span>
+          </div>
+          <button
+            className="finalizePurchase__sectionOne__continue"
+            onMouseEnter={() => setButtonAnimation(true)}
+            onMouseLeave={() => setButtonAnimation(false)}
+            type="submit"
+          >
+            <p
+              style={buttonAnimation ? { transform: 'translatex(-100%)' } : {}}
+            >
+              Pagar
+            </p>
+            <i
+              className="bx bx-chevron-right"
+              style={buttonAnimation ? { transform: 'translatex(-90%)' } : {}}
+            ></i>
+          </button>
+        </form>
         <div
           className="finalizePurchase__sectionOne__back"
           onMouseEnter={() => setbackButtonAnimation(true)}
