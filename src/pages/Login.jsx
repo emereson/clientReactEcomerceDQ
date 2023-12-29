@@ -20,6 +20,7 @@ const Login = ({ setuserData }) => {
         localStorage.setItem('userData', userDataJSON);
         setuserData(res.data);
         navigate('/');
+        window.location.reload();
       })
 
       .catch((err) => {

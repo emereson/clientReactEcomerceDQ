@@ -59,7 +59,7 @@ const FPDelivery = ({ setselectDelivery, selectDelivery, alertDelivery }) => {
               </p>
               <p
                 className="FPDeliveryCardDelivery__viewMap"
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/zonas-de-reparto')}
               >
                 ver mapa
               </p>

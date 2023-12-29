@@ -19,6 +19,7 @@ const Register = () => {
         const userDataJSON = JSON.stringify(res.data);
         localStorage.setItem('userData', userDataJSON);
         navigate('/');
+        window.location.reload();
       })
 
       .catch((err) => {
@@ -36,7 +37,7 @@ const Register = () => {
         <form className="login__form" onSubmit={handleSubmit(submit)}>
           <div className="login__div">
             <label htmlFor="name">
-              <i class="bx bxs-user"></i>
+              <i className="bx bxs-user"></i>
             </label>
             <input
               {...register('name')}
@@ -48,7 +49,7 @@ const Register = () => {
           </div>
           <div className="login__div">
             <label htmlFor="lastName">
-              <i class="bx bxs-user-detail"></i>
+              <i className="bx bxs-user-detail"></i>
             </label>
             <input
               {...register('lastName')}
@@ -60,7 +61,7 @@ const Register = () => {
           </div>
           <div className="login__div">
             <label htmlFor="email">
-              <i class="bx bxs-envelope"></i>
+              <i className="bx bxs-envelope"></i>
             </label>
             <input
               {...register('email')}
@@ -72,7 +73,7 @@ const Register = () => {
           </div>
           <div className="login__div" style={{ width: '47%' }}>
             <label htmlFor="dni">
-              <i class="bx bxs-user-badge"></i>
+              <i className="bx bxs-user-badge"></i>
             </label>
             <input
               {...register('dni')}
@@ -85,7 +86,7 @@ const Register = () => {
           </div>
           <div className="login__div" style={{ width: '47%' }}>
             <label htmlFor="phoneNumber">
-              <i class="bx bxs-phone"></i>
+              <i className="bx bxs-phone"></i>
             </label>
             <input
               {...register('phoneNumber')}
@@ -97,7 +98,7 @@ const Register = () => {
           </div>
           <div className="login__div">
             <label htmlFor="address">
-              <i class="bx bxs-map"></i>
+              <i className="bx bxs-map"></i>
             </label>
             <input
               {...register('address')}
@@ -109,7 +110,7 @@ const Register = () => {
           </div>
           <div className="login__div">
             <label htmlFor="password">
-              <i class="icon icon-padlock-1"></i>
+              <i className="icon icon-padlock-1"></i>
             </label>
             <input
               {...register('password')}

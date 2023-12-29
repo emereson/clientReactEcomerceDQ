@@ -50,21 +50,46 @@ const Cart = ({ openCart, cartData, setopenCart }) => {
             <FormatPrice price={calculateCartTotal()} />
           </span>
         </article>
-        <Link
-          to="finalizar-compra"
-          className="cartSectionTwo__articleTwo"
-          onMouseEnter={() => setButtonAnimation(true)}
-          onMouseLeave={() => setButtonAnimation(false)}
-          onClick={() => setopenCart(false)}
-        >
-          <p style={buttonAnimation ? { transform: 'translatex(-100%)' } : {}}>
-            continuar
-          </p>
-          <i
-            className="bx bx-chevron-right"
-            style={buttonAnimation ? { transform: 'translatex(-90%)' } : {}}
-          ></i>
-        </Link>
+        {cartData?.length > 0 ? (
+          <Link
+            to="finalizar-compra"
+            className="cartSectionTwo__articleTwo"
+            onMouseEnter={() => setButtonAnimation(true)}
+            onMouseLeave={() => setButtonAnimation(false)}
+            onClick={() => setopenCart(false)}
+          >
+            <p
+              style={buttonAnimation ? { transform: 'translatex(-100%)' } : {}}
+            >
+              continuar
+            </p>
+            <i
+              className="bx bx-chevron-right"
+              style={buttonAnimation ? { transform: 'translatex(-90%)' } : {}}
+            ></i>
+          </Link>
+        ) : (
+          <div
+            className="cartSectionTwo__articleTwo"
+            onMouseEnter={() => setButtonAnimation(true)}
+            onMouseLeave={() => setButtonAnimation(false)}
+            onClick={() => setopenCart(false)}
+          >
+            <p
+              style={
+                buttonAnimation
+                  ? { transform: 'translatex(-120%)' }
+                  : { textAlign: 'center' }
+              }
+            >
+              El Carrito Esta Vacio
+            </p>
+            <i
+              className="bx bx-chevron-right"
+              style={buttonAnimation ? { transform: 'translatex(-90%)' } : {}}
+            ></i>
+          </div>
+        )}
       </section>
     </div>
   );

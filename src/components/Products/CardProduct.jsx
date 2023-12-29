@@ -78,12 +78,16 @@ const CardProduct = ({ product, selectCategory, filterTextProduct }) => {
           <small>{product.description}</small>
           <p>Tamaño: {selectOption?.name?.charAt(0).toUpperCase()}</p>
         </div>
-        <span
-          className="cardProduct__articleOne__label"
-          style={{ backgroundColor: `${product.labelColor}` }}
-        >
-          {product.label}
-        </span>
+        {product.label === 'no' ? (
+          ''
+        ) : (
+          <span
+            className="cardProduct__articleOne__label"
+            style={{ backgroundColor: `${product.labelColor}` }}
+          >
+            {product.label}
+          </span>
+        )}
         {selectOption?.discount > 0 ? (
           <span className="cardProduct__articleOne__labelDescount">
             - {selectOption.discount}%

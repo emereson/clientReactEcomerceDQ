@@ -14,7 +14,6 @@ const FinalizePurchase = ({ userData }) => {
   const [selectSlide, setselectSlide] = useState('dataOrder');
   const [dataClient, setdataClient] = useState();
   const [dataPay, setDataPay] = useState({});
-  console.log(dataPay);
 
   useEffect(() => {
     // Calcula la información detallada de cada producto
@@ -35,7 +34,8 @@ const FinalizePurchase = ({ userData }) => {
       delivery: selectDelivery,
       totalPrice: calculateTotal(),
     }));
-  }, [cartData, dataClient, selectDelivery]); // Asegúrate de incluir cartData como dependencia si se utiliza en el efecto
+  }, [cartData, dataClient, selectDelivery]);
+
   const calculatePrice = (product) => {
     const optionPrice = product?.priceDiscount || 0;
     const extraTotalPrice = product?.selectExtra?.reduce(

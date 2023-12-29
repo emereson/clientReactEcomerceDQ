@@ -117,6 +117,7 @@
     border-radius: 0.5em;
     overflow: hidden;
     cursor: pointer;
+    margin-top: 0.8em;
 }
 
 .finalizePurchase__sectionOne__continue p {
