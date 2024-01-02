@@ -72,7 +72,7 @@ const CardProduct = ({ product, selectCategory, filterTextProduct }) => {
   return (
     <div className={`cardProduct__container ${validFilterProduct}`}>
       <article className="cardProduct__articleOne">
-        <img src={product.productImg} alt="" />
+        <img src={product.productImg} alt={product?.name} />
         <div>
           <h3>{product.name}</h3>
           <small>{product.description}</small>

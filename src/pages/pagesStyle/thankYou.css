@@ -104,14 +104,18 @@
 }
 
 .thankYou__sectionTwo__clickHome {
-    width: fit-content !important;
+    width: fit-content;
     margin: auto;
     margin-top: 1em;
     font-weight: 600;
     font-size: 18px;
     background-color: var(--body-red);
     color: var(--text-color-white);
-    padding: 0.5em 1em;
+    padding: 0.5em 1em !important;
     border-radius: 5px;
     cursor: pointer;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center;
 }

@@ -2,15 +2,15 @@
     position: relative;
     width: 100%;
     min-height: 500px;
-    max-width: 1400px;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
     gap: 1em;
     padding: 0 1em;
     transform: translateX(0%);
     overflow: hidden;
+    opacity: 1;
     transition: 0.3s ease;
 }
 
@@ -19,10 +19,12 @@
     top: 0;
     transform: translateX(-100%);
     transition: 0.3s ease;
+    opacity: 0;
 }
 
 .MyPurchase__article {
     width: 100%;
+    max-width: 1400px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

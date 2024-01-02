@@ -1,5 +1,6 @@
 import React from 'react';
 import './pagesStyle/thankYou.css';
+import { Link } from 'react-router-dom';
 
 const ThankYou = () => {
   const dataPayJSON = localStorage.getItem('dataPay');
@@ -52,7 +53,9 @@ const ThankYou = () => {
             </p>
           </div>
         </article>
-        <p className="thankYou__sectionTwo__clickHome">Regresar al inicio</p>
+        <Link to="/" className="thankYou__sectionTwo__clickHome">
+          Regresar al inicio
+        </Link>
       </section>
     </div>
   );

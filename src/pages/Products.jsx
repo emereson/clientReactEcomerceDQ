@@ -19,7 +19,7 @@ const Products = () => {
       .get(url)
       .then((res) => setSeccionCategories(res.data.sectionProduct))
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const url = `${
@@ -30,7 +30,7 @@ const Products = () => {
       .get(url)
       .then((res) => setAllProduct(res.data.categoryProducts))
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
   return (
     <div className="product__container">

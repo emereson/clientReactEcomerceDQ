@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import ProtectedRoutes from './utils/ProtecteRoutes';
 import Login from './pages/Login';
 import Header from './pages/Header';
@@ -16,6 +16,7 @@ import DeliveryArea from './pages/DeliveryArea';
 import MyProfile from './pages/MyProfile';
 import Contacts from './pages/Contacts';
 import ThankYou from './pages/ThankYou';
+import ScrollToTop from './hooks/ScrollToTop';
 
 function App() {
   const userDataJSON = localStorage.getItem('userData');
@@ -43,6 +44,7 @@ function App() {
 
   return (
     <div className="app_container">
+      <ScrollToTop />
       <Header userData={userData} />
 
       <Routes>
