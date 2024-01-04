@@ -91,10 +91,16 @@ const Register = () => {
             <input
               {...register('phoneNumber')}
               id="phoneNumber"
-              type="phoneNumber"
+              type="number"
               required
               placeholder="telefono"
             />
+          </div>
+          <div className="login__div">
+            <label htmlFor="date">
+              <i class="bx bxs-calendar"></i>
+            </label>
+            <input {...register('date')} id="date" type="date" required />
           </div>
           <div className="login__div">
             <label htmlFor="address">
@@ -103,7 +109,7 @@ const Register = () => {
             <input
               {...register('address')}
               id="address"
-              type="address"
+              type="text"
               required
               placeholder="su dirección"
             />
