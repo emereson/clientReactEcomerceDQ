@@ -5,36 +5,48 @@ import './pagesStyle/login.css';
 import { useState } from 'react';
 
 const Register = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, watch } = useForm();
   const navigate = useNavigate();
   const [error, seterror] = useState();
+  const [errorPassword, seterrorPassword] = useState();
+
+  const password = watch('password');
+  const repeatedPassword = watch('repeatPassword');
 
   const submit = (data) => {
-    const url = `${import.meta.env.VITE_URL_API}/client/signup`;
+    if (password === repeatedPassword) {
+      const url = `${import.meta.env.VITE_URL_API}/client/signup`;
 
-    axios
-      .post(url, data)
-      .then((res) => {
-        localStorage.setItem('token', res.data.token);
-        const userDataJSON = JSON.stringify(res.data);
-        localStorage.setItem('userData', userDataJSON);
-        navigate('/');
-        window.location.reload();
-      })
+      axios
+        .post(url, data)
+        .then((res) => {
+          localStorage.setItem('token', res.data.token);
+          const userDataJSON = JSON.stringify(res.data);
+          localStorage.setItem('userData', userDataJSON);
+          navigate('/');
+          window.location.reload();
+        })
 
-      .catch((err) => {
-        seterror(err.response.data);
-      });
-
-    reset();
+        .catch((err) => {
+          seterror(err.response.data);
+        });
+    } else {
+      seterrorPassword('Las contraseñas no coinciden');
+    }
   };
 
+  console.log(repeatedPassword);
   return (
     <div className="longin__container">
       <section className="longin__section">
         <img src="/logo.svg" alt="" />
         <h2>REGISTRARME</h2>
         <form className="login__form" onSubmit={handleSubmit(submit)}>
+          {error ? (
+            <span>El Correo o el DNI ya se encuantran registrado</span>
+          ) : (
+            ''
+          )}
           <div className="login__div">
             <label htmlFor="name">
               <i className="bx bxs-user"></i>
@@ -123,6 +135,24 @@ const Register = () => {
               id="password"
               type="password"
               placeholder="contraseña"
+              minLength={6}
+              required
+            />
+          </div>
+          {errorPassword ? (
+            <span style={{ margin: '-0.5em' }}>{errorPassword}</span>
+          ) : (
+            ''
+          )}
+          <div className="login__div">
+            <label htmlFor="repeatPassword">
+              <i className="icon icon-padlock-1"></i>
+            </label>
+            <input
+              {...register('repeatPassword')}
+              id="repeatPassword"
+              type="password"
+              placeholder="repita su contraseña"
               minLength={6}
               required
             />
