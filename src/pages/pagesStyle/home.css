@@ -390,3 +390,9 @@
     background-color: var(--body-red);
     transition: 0.3s ease;
 }
+
+@media(max-width:650px) {
+    .home__section__three-articleTwo a {
+        width: 100%;
+    }
+}

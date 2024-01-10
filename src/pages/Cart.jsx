@@ -4,7 +4,7 @@ import CartCardProduct from '../components/cart/CartCardProduct';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Cart = ({ openCart, cartData, setopenCart }) => {
+const Cart = ({ openCart, cartData, setopenCart, userData }) => {
   const [buttonAnimation, setButtonAnimation] = useState(false);
 
   // Función para calcular el precio total de un producto en el carrito
@@ -52,7 +52,7 @@ const Cart = ({ openCart, cartData, setopenCart }) => {
         </article>
         {cartData?.length > 0 ? (
           <Link
-            to="finalizar-compra"
+            to={userData ? 'finalizar-compra' : 'log-in'}
             className="cartSectionTwo__articleTwo"
             onMouseEnter={() => setButtonAnimation(true)}
             onMouseLeave={() => setButtonAnimation(false)}

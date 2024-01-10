@@ -76,7 +76,7 @@ const CardProduct = ({ product, selectCategory, filterTextProduct }) => {
         <div>
           <h3>{product.name}</h3>
           <small>{product.description}</small>
-          <p>Tamaño: {selectOption?.name?.charAt(0).toUpperCase()}</p>
+          <p>{selectOption?.name}</p>
         </div>
         {product.label === 'no' ? (
           ''

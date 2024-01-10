@@ -143,7 +143,12 @@ const Header = ({ userData }) => {
           <span></span>
         </article>
       </div>
-      <Cart setopenCart={setopenCart} openCart={openCart} cartData={cartData} />
+      <Cart
+        setopenCart={setopenCart}
+        openCart={openCart}
+        cartData={cartData}
+        userData={userData}
+      />
     </header>
   );
 };

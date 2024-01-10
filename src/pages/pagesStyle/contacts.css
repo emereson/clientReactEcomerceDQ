@@ -70,6 +70,7 @@
     margin-top: 1em;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     gap: 2em;
     justify-content: center;
     align-items: center;
@@ -104,4 +105,10 @@
 .contactsSectionOne__articleThree p {
     font-size: 14px;
     text-align: center;
+}
+
+@media(max-width:650px) {
+    .contactsSectionOne__articleThree a {
+        width: 100% !important;
+    }
 }

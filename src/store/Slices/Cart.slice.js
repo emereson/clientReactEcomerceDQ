@@ -1,31 +1,40 @@
-// En tu slice de Redux (por ejemplo, Cart.slice.js)
 import { createSlice } from '@reduxjs/toolkit';
+
+const loadCartFromLocalStorage = () => {
+  const cartData = localStorage.getItem('cart');
+  return cartData ? JSON.parse(cartData) : [];
+};
 
 export const cartSlice = createSlice({
   name: 'cart',
-  initialState: [],
+  initialState: loadCartFromLocalStorage(),
   reducers: {
-    setCart: (state, action) => [...state, ...action.payload],
-
+    setCart: (state, action) => {
+      const updatedCart = [...state, ...action.payload];
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      return updatedCart;
+    },
     incrementCounter: (state, action) => {
       const { index } = action.payload;
       state[index].counter += 1;
+      localStorage.setItem('cart', JSON.stringify(state));
     },
-
     decrementCounter: (state, action) => {
       const { index } = action.payload;
-
       if (state[index].counter > 1) {
         state[index].counter -= 1;
+        localStorage.setItem('cart', JSON.stringify(state));
       }
     },
-
     removeProduct: (state, action) => {
       const { index } = action.payload;
       state.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(state));
     },
-
-    clearCart: () => [],
+    clearCart: () => {
+      localStorage.removeItem('cart');
+      return [];
+    },
   },
 });
 
